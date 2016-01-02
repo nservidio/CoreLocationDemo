@@ -7,19 +7,50 @@
 //
 
 import UIKit
+import CoreLocation
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CLLocationManagerDelegate {
+
+    private let locationManager = CLLocationManager()
+    private var firstTimeFlag = true
+
+    // MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.setupLocationManager()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    // MARK: Setups
+
+    func setupLocationManager() {
+        self.locationManager.delegate = self
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
     }
 
+    // MARK: CLLocationManagerDelegate
 
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if(self.firstTimeFlag) {
+            print("First time")
+            self.firstTimeFlag = false
+        }
+
+        var statusString : String
+        switch status {
+        case .NotDetermined:
+            statusString = "Not Determined"
+        case .AuthorizedWhenInUse:
+            statusString = "Authorized"
+        default:
+            statusString = "Default"
+        }
+        print(statusString)
+    }
+
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print(locations.first)
+    }
 }
 
