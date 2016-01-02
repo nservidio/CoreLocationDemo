@@ -18,8 +18,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zjE-Lv-916">
-                                <rect key="frame" x="277" y="285" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="254" y="285" width="92" height="30"/>
+                                <state key="normal" title="Find Location"/>
                                 <connections>
                                     <action selector="didTapFindLocationButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2qH-eM-GqC"/>
                                 </connections>
