@@ -26,31 +26,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     func setupLocationManager() {
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
+    }
+
+    // MARK : Actions
+
+    @IBAction func didTapFindLocationButton(sender: AnyObject) {
+        NSLog("About to start looking for location")
         self.locationManager.startUpdatingLocation()
+        NSLog("Already started updating location")
     }
 
     // MARK: CLLocationManagerDelegate
 
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if(self.firstTimeFlag) {
-            print("First time")
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if (self.firstTimeFlag) {
+            NSLog("Found Location")
+            NSLog("\(locations.first)")
             self.firstTimeFlag = false
         }
-
-        var statusString : String
-        switch status {
-        case .NotDetermined:
-            statusString = "Not Determined"
-        case .AuthorizedWhenInUse:
-            statusString = "Authorized"
-        default:
-            statusString = "Default"
-        }
-        print(statusString)
-    }
-
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print(locations.first)
     }
 }
 
